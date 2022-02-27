@@ -36,25 +36,13 @@ export default {
       @input="onInputChange"
       placeholder="pivoine"
     >
-    <label for="hiver" class="season-button">
-      <input type="checkbox" id="hiver" name="hiver" value="hiver" @click="onCheckSeason">
-      hiver
-    </label>
 
-    <label for="printemps" class="season-button">
-      <input type="checkbox" id="printemps" name="printemps" value="printemps" @click="onCheckSeason">
-      printemps
-    </label>
-
-    <label for="été" class="season-button">
-      <input type="checkbox" id="été" name="été" value="été" @click="onCheckSeason">
-      été
-    </label>
-
-    <label for="automne" class="season-button">
-      <input type="checkbox" id="automne" name="automne" value="automne" @click="onCheckSeason">
-      automne
-    </label>
+    <div v-for="(value, key) in seasons" :key="key">
+      <label v-bind:for="key" class="season-button" :is-selected="value">
+        <input type="checkbox" v-bind:id="key" v-bind:name="key" v-bind:value="key" @click="onCheckSeason">
+        {{ key }}
+      </label>
+    </div>
   </form>
 </template>
 
@@ -81,7 +69,8 @@ export default {
     text-decoration: none;
 }
   .season-button:hover,
-  .season-button:focus {
+  .season-button:focus,
+  .season-button[is-selected=true] {
       border: 1px solid #d48e9a;
       background: #ffc4d4;
       background: -webkit-gradient(linear, left top, left bottom, from(#ffc4d4), to(#b27782));
@@ -96,5 +85,4 @@ export default {
       background: -moz-linear-gradient(top, #94636c, #94636c);
       background: linear-gradient(to bottom, #94636c, #94636c);
   }
-
 </style>
