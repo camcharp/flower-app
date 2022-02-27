@@ -4,8 +4,6 @@ export default {
   props: ['seasons'],
   data() {
     return {
-      message: '',
-      value: ''
     }
   },
   components: {
@@ -32,7 +30,7 @@ export default {
       Rechercher une fleur :
     </label>
     <input
-      :value="message"
+      type="search"
       @input="onInputChange"
       placeholder="pivoine"
     >

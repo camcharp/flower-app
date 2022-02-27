@@ -1,17 +1,17 @@
 
 <script>
-import FlowersList from './components/FlowersList'
+import Home from './components/Home'
 
 export default {
   name: 'App',
   components: {
-    FlowersList
+    Home
   }
 }
 </script>
 
 <template>
-  <FlowersList/>
+  <Home/>
 </template>
 
 <style>
