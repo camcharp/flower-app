@@ -1,7 +1,12 @@
 <script>
+// import SeasonButton from './SeasonButton'
+
 export default {
   name: 'flower-list-component',
-  props: ['flowers']
+  props: ['flowers'],
+  components: {
+    // SeasonButton
+  }
 }
 </script>
 
@@ -14,8 +19,8 @@ export default {
             {{ flower.name }}
           </p>
           <ul class="flower-seasons">
-            <li v-for="season in flower.seasons" :key="season">
-              {{ season }}
+            <li v-for="season in flower.seasons" :key="season" class="flower-season">
+              {{season}}
             </li>
           </ul>
           <ul class="flower-months">
@@ -69,5 +74,10 @@ export default {
     align-items: center;
     align-content: space-between;
     gap: 1rem 1rem;
+  }
+  .flower-season {
+    background-color: #E0E0E0;
+    padding: 0.5rem;
+    border-radius: 16px;
   }
 </style>

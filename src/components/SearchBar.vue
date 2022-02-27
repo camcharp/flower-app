@@ -1,4 +1,6 @@
 <script>
+import SeasonButton from './SeasonButton'
+
 export default {
   name: 'search-bar-component',
   props: ['seasons'],
@@ -7,17 +9,18 @@ export default {
     }
   },
   components: {
+    SeasonButton
   },
   emits: ['inputChange', 'checkbox'],
   methods: {
     onInputChange(event) {
       this.$emit('inputChange', event.target.value);
     },
-    onCheckSeason(event) {
+    onCheckSeason(value) {
       this.$emit('checkbox',
       {
-        season: event.target.value,
-        checked: event.target.checked
+        season: value.season,
+        checked: value.checked
       });
     }
   }
@@ -27,7 +30,7 @@ export default {
 <template>
   <form id="flower-form">
     <label for="flower-search">
-      Rechercher une fleur :
+      Rechercher un nom de fleur :
     </label>
     <input
       type="search"
@@ -36,10 +39,7 @@ export default {
     >
 
     <div v-for="(value, key) in seasons" :key="key">
-      <label v-bind:for="key" class="season-button" :is-selected="value">
-        <input type="checkbox" v-bind:id="key" v-bind:name="key" v-bind:value="key" @click="onCheckSeason">
-        {{ key }}
-      </label>
+      <SeasonButton :isSelected="value" :season="key" @checkbox="onCheckSeason"/>
     </div>
   </form>
 </template>
@@ -65,7 +65,7 @@ export default {
     font: normal normal bold 20px arial;
     color: black;
     text-decoration: none;
-}
+  }
   .season-button:hover,
   .season-button:focus,
   .season-button[is-selected=true] {
