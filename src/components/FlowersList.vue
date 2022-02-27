@@ -1,5 +1,6 @@
 <script>
 import flowers from '../flowers.json'
+import SearchBar from './SearchBar'
 
 const seasonMapping = {
   janvier: ['hiver'],
@@ -49,22 +50,46 @@ function formatData(flowers) {
 }
 
 export default {
+  name: 'flower-component',
   data() {
     return {
-      flowers: formatData(flowers)
+      flowers: formatData(flowers),
+      searchedText: ''
     }
   },
-  name: 'flower-component',
+  components: {
+    SearchBar
+  },
   methods: {
+    updateSearchedText: function(value) {
+      this.searchedText = value;
+    },
+    filterFlowers(input, flowers) {
+      const filteredFlowers = flowers.filter(flower => {
+        return flower.name.toLowerCase().includes(input.toLowerCase());
+      })
+      return filteredFlowers;
+    }
   }
 }
 </script>
 
 <template>
   <div class="wrapper">
+    <SearchBar @inputChange="updateSearchedText"></SearchBar>
     <ul id="flowers">
-      <li v-for="flower in flowers" :key="flower.name">
-        {{flower}}
+      <li v-for="flower in filterFlowers(searchedText, flowers)" :key="flower.name" class="flower-tile">
+        <img class="flower-picture" :src="require(`../assets/flowers/${flower.picture}`)" :alt="flower.name">
+          <div id="flower-infos">
+            <p class="flower-title">
+              {{ flower.name }}
+            </p>
+            <ul class="flower-seasons">
+              <li v-for="season in flower.seasons" :key="season">
+                {{ season }}
+              </li>
+            </ul>
+          </div>
       </li>
     </ul>
   </div>
