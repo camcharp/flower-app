@@ -54,7 +54,8 @@ export default {
   data() {
     return {
       flowers: formatData(flowers),
-      searchedText: ''
+      searchedText: '',
+      selectedSeasons: [],
     }
   },
   components: {
@@ -64,9 +65,24 @@ export default {
     updateSearchedText: function(value) {
       this.searchedText = value;
     },
-    filterFlowers(input, flowers) {
+    updateSelectedSeasons: function(seasonObject) {
+      if (seasonObject.checked) {
+        this.selectedSeasons.push(seasonObject.season);
+      } else {
+        this.selectedSeasons = this.selectedSeasons.filter(selectedSeason => selectedSeason !== seasonObject.season);
+      }
+    },
+    filterFlowers(flowers, input, selectedSeasons) {
       const filteredFlowers = flowers.filter(flower => {
-        return flower.name.toLowerCase().includes(input.toLowerCase());
+        let isFlowerMatchingSearchText = true;
+        let isFlowerMatchinSeasons = true;
+        if (input) {
+          isFlowerMatchingSearchText = flower.name.toLowerCase().includes(input.toLowerCase());
+        }
+        if (selectedSeasons && selectedSeasons.length) {
+          isFlowerMatchinSeasons = flower.seasons.some(season => selectedSeasons.includes(season));
+        }
+        return isFlowerMatchingSearchText && isFlowerMatchinSeasons;
       })
       return filteredFlowers;
     }
@@ -76,9 +92,9 @@ export default {
 
 <template>
   <div class="wrapper">
-    <SearchBar @inputChange="updateSearchedText"></SearchBar>
+    <SearchBar @inputChange="updateSearchedText" @checkbox="updateSelectedSeasons"></SearchBar>
     <ul id="flowers">
-      <li v-for="flower in filterFlowers(searchedText, flowers)" :key="flower.name" class="flower-tile">
+      <li v-for="flower in filterFlowers(flowers, searchedText, selectedSeasons)" :key="flower.name" class="flower-tile">
         <img class="flower-picture" :src="require(`../assets/flowers/${flower.picture}`)" :alt="flower.name">
           <div id="flower-infos">
             <p class="flower-title">
@@ -87,6 +103,11 @@ export default {
             <ul class="flower-seasons">
               <li v-for="season in flower.seasons" :key="season">
                 {{ season }}
+              </li>
+            </ul>
+            <ul class="flower-months">
+              <li v-for="month in flower.months" :key="month">
+                {{ month }}
               </li>
             </ul>
           </div>
