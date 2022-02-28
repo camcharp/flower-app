@@ -102,11 +102,9 @@ export default {
 
 <style>
   /* fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Quicksand:wght@300;400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
   /* icons */
   @import url('https://css.gg/search.css');
-  @import url('https://css.gg/add.css');
-  @import url('https://css.gg/remove.css');
   @import url('https://css.gg/undo.css');
   @import url('https://css.gg/radio-check.css');
   @import url('https://css.gg/radio-checked.css');

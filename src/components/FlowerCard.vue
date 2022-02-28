@@ -32,10 +32,10 @@
 <style>
   .flower-card {
     width: 350px;
-    height: 450px;
+    height: 470px;
     border-radius: 55px;
     background: #eeeded;
-    box-shadow:  12px 12px 27px #dddcdc, -12px -12px 27px #ffffff;    
+    box-shadow:  12px 12px 27px #dddcdc, -12px -12px 27px #ffffff;
   }
   .flower-picture {
     width: 100%;
@@ -57,7 +57,7 @@
     padding-bottom: 0.5rem;
     font-size: 1.3rem;
     font-weight: 400;
-  }
+  } 
   .flower-title::after {
     content: "";
     position: absolute;
@@ -94,6 +94,18 @@
     text-decoration: line-through;
   }
   .flower-season.active {
-    background-color: #C2D1A9;;
+    background-color: #C2D1A9;
+  }
+  @media (max-width: 658px) {
+    .flower-card {
+      width: 90%;
+      height: auto;
+    }
+    .flower-picture {
+      max-height: 170px;
+    }
+    .flower-title {
+      font-size: 1rem;
+    }
   }
 </style>

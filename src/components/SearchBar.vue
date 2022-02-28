@@ -35,7 +35,7 @@ export default {
     <div class="filter">
       <i class="gg-search"></i>
       <label for="flower-search">
-        <span>Rechercher un nom de fleur :</span>
+        <span>Rechercher une fleur :</span>
       </label>
       <input
         type="search"
@@ -44,7 +44,7 @@ export default {
         :value="searchInput"
       >
     </div>
-    <div class="filter">
+    <div class="filter seasons">
       <span>Filtrer par saison de floraison : </span>
       <div class="seasons-wrapper">
         <div v-for="(value, key) in seasons" :key="key">
@@ -97,11 +97,41 @@ export default {
     padding: 6px 10px;
     border-radius: 16px;
     border: 1px solid #74747B;
-  }
+  } 
   .seasons-wrapper {
     display: flex;
     flex-flow: row wrap;
     margin: 0 1rem;
     gap: 1rem;
+  }
+  @media (max-width: 658px) {
+    .filter {
+      border-right: 0;
+      padding: 10px;
+      width: 100%;
+    }
+    .filter::after {
+        content: "";
+        position: absolute;
+        border-top: 1px solid #C3CAD0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0;
+    }
+    .filter.seasons {
+      display: flex;
+      flex-flow: column wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .seasons-wrapper {
+      align-items: center;
+      justify-content: flex-start;
+      margin: 0 0 1rem 0;
+    }
+    .reset-search {
+      padding: 10px;
+    }
   }
 </style>

@@ -64,6 +64,12 @@
     gap: 4rem 5rem;
     margin: 0 6rem 2rem;
   }
+  @media (max-width: 658px) {
+    #flowers-list {
+      gap: 2rem 1rem;
+      margin: 0;
+    }
+  } 
   .results-end {
     text-align: center;
   }
