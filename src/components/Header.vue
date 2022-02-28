@@ -27,5 +27,6 @@ export default {
     padding-left: 10%;
     margin: 0;
     line-height: 65px;
+    font-weight: 500;
   }
 </style>

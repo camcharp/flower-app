@@ -1,11 +1,11 @@
 <script>
-  import FlowerTile from './FlowerTile'
+  import FlowerCard from './FlowerCard'
   export default {
     name: 'flower-list-component',
-    props: ['flowers'],
+    props: ['flowers', 'seasonsStatus'],
     emits: ['resetSearch'],
     components: {
-      FlowerTile
+      FlowerCard
     },
     methods: {
       resetSearch() {
@@ -26,8 +26,12 @@
   </div>
   <div v-if="flowers && flowers.length">
     <ul id="flowers-list">
-      <FlowerTile :flowers="flowers"/>
+      <FlowerCard
+        :flowers="flowers"
+        :seasonsStatus="seasonsStatus"
+      />
     </ul>
+    <p class="results-end">Fin des résultats</p>
   </div>
   <div v-else class="no-results">
     <p>
@@ -58,7 +62,10 @@
     align-items: center;
     align-content: space-between;
     gap: 4rem 5rem;
-    margin: 0 6rem;
+    margin: 0 6rem 2rem;
+  }
+  .results-end {
+    text-align: center;
   }
   ul {
     padding: 0;

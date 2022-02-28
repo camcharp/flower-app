@@ -33,8 +33,8 @@ function isMonthsListValid(months) {
   return months.every(month => validMonths.includes(month))
 }
 
-function areAllSeasonsUnchecked(selectedSeasons) {
-  return Object.values(selectedSeasons).every(checked => {
+function areAllSeasonsUnchecked(seasonsStatus) {
+  return Object.values(seasonsStatus).every(checked => {
     return checked === false;
   });
 }

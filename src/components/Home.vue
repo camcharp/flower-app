@@ -28,7 +28,7 @@ export default {
       flowers: formatData(flowers),
       searchParams: {
         searchedText: '',
-        selectedSeasons: {
+        seasonsStatus: {
           hiver: false,
           printemps: false,
           été: false,
@@ -46,13 +46,13 @@ export default {
     updateSearchedText: function(input) {
       this.searchParams.searchedText = input;
     },
-    updateSelectedSeasons: function(seasonObject) {
-      this.searchParams.selectedSeasons[seasonObject.season] = seasonObject.checked;
+    updateseasonsStatus: function(seasonObject) {
+      this.searchParams.seasonsStatus[seasonObject.season] = seasonObject.checked;
     },
     resetSearchParams: function() {
       this.searchParams = {
         searchedText: '',
-        selectedSeasons: {
+        seasonsStatus: {
           hiver: false,
           printemps: false,
           été: false,
@@ -64,13 +64,14 @@ export default {
       const filteredFlowers = flowers.filter(flower => {
         let isFlowerMatchingSearchText = true;
         let isFlowerMatchinSeasons = true;
+
         if (searchParams.searchedText) {
           isFlowerMatchingSearchText = flower.name.toLowerCase().includes(searchParams.searchedText.toLowerCase());
         }
 
-        if (!areAllSeasonsUnchecked(searchParams.selectedSeasons)) {
+        if (!areAllSeasonsUnchecked(searchParams.seasonsStatus)) {
           isFlowerMatchinSeasons = flower.seasons.some(season => {
-            return searchParams.selectedSeasons[season] === true;
+            return searchParams.seasonsStatus[season] === true;
           });
         }
         return isFlowerMatchingSearchText && isFlowerMatchinSeasons;
@@ -86,13 +87,14 @@ export default {
   <main class="wrapper">
     <SearchBar 
       @inputChange="updateSearchedText"
-      @seasonClicked="updateSelectedSeasons"
+      @seasonClicked="updateseasonsStatus"
       @resetSearch="resetSearchParams"
-      :seasons="searchParams.selectedSeasons"
+      :seasons="searchParams.seasonsStatus"
       :searchInput="searchParams.searchedText"
     />
     <FlowersList
       :flowers="filterFlowers(flowers, searchParams)"
+      :seasonsStatus="searchParams.seasonsStatus"
       @resetSearch="resetSearchParams"
     />
   </main>
@@ -108,6 +110,8 @@ export default {
   @import url('https://css.gg/undo.css');
   @import url('https://css.gg/radio-check.css');
   @import url('https://css.gg/radio-checked.css');
+  @import url('https://css.gg/calendar.css');
+  @import url('https://css.gg/check.css');
   
   body {
     background-color: #f5f7f5;

@@ -92,6 +92,12 @@ export default {
     padding: 0 1rem;
     border-right: 1px solid #C3CAD0;
   }
+  .filter input {
+    font-family: 'Quicksand', sans-serif;
+    padding: 6px 10px;
+    border-radius: 16px;
+    border: 1px solid #74747B;
+  }
   .seasons-wrapper {
     display: flex;
     flex-flow: row wrap;
