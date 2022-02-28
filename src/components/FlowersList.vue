@@ -1,25 +1,22 @@
 <script>
-// import SeasonButton from './SeasonButton'
-
-export default {
-  name: 'flower-list-component',
-  props: ['flowers'],
-  components: {
-    // SeasonButton
+  export default {
+    name: 'flower-list-component',
+    props: ['flowers'],
+    components: {
+    }
   }
-}
 </script>
 
 <template>
   <ul id="flowers-list">
     <li v-for="flower in flowers" :key="flower.name" class="flower-tile">
       <img class="flower-picture" :src="require(`../assets/flowers/${flower.picture}`)" :alt="flower.name">
-        <div id="flower-infos">
+        <div class="flower-infos">
           <p class="flower-title">
             {{ flower.name }}
           </p>
           <ul class="flower-seasons">
-            <li v-for="season in flower.seasons" :key="season" class="flower-season">
+            <li v-for="season in flower.seasons" :key="season" v-bind:class="`flower-season ${season}`">
               {{season}}
             </li>
           </ul>
@@ -34,7 +31,6 @@ export default {
 </template>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Quicksand:wght@300;400;500;700&display=swap');
   .wrapper {
     width: 80%;
     margin: 0 auto;
@@ -46,7 +42,11 @@ export default {
     justify-content: center;
     align-items: center;
     align-content: space-between;
-    gap: 2rem 2rem;
+    gap: 4rem 5rem;
+    margin: 0 6rem;
+  }
+  ul {
+    padding: 0;
   }
   ul li {
     list-style: none;
@@ -63,10 +63,14 @@ export default {
     background: #eeeded;
     box-shadow:  12px 12px 27px #dddcdc, -12px -12px 27px #ffffff;    
   }
+  .flower-infos {
+    padding: 0 2rem;
+  }
   .flower-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    padding: 0 0 0 2rem;
+    font-size: 1.3rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .flower-seasons, .flower-months {
     display: flex;
@@ -79,5 +83,17 @@ export default {
     background-color: #E0E0E0;
     padding: 0.5rem;
     border-radius: 16px;
+  }
+  .automne {
+    background-color: darksalmon;
+  }
+  .hiver {
+    background-color: lightblue;
+  }
+  .été {
+    background-color: pink;
+  }
+  .printemps {
+    background-color: mediumaquamarine;
   }
 </style>

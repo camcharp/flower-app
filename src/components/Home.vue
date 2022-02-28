@@ -1,5 +1,6 @@
 <script>
 import flowers from '../flowers.json'
+import Header from './Header'
 import FlowersList from './FlowersList'
 import SearchBar from './SearchBar'
 import {
@@ -36,14 +37,16 @@ export default {
     }
   },
   components: {
+    Header,
     SearchBar,
     FlowersList
   },
   methods: {
-    updateSearchedText: function(value) {
-      this.searchedText = value;
+    updateSearchedText: function(input) {
+      this.searchedText = input;
     },
     updateSelectedSeasons: function(seasonObject) {
+      console.log('seasonObject', seasonObject);
       this.selectedSeasons[seasonObject.season] = seasonObject.checked;
     },
     filterFlowers(flowers, input, selectedSeasons) {
@@ -68,7 +71,8 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper">
+  <Header/>
+  <main class="wrapper">
     <SearchBar 
       @inputChange="updateSearchedText"
       @checkbox="updateSelectedSeasons"
@@ -77,49 +81,19 @@ export default {
     <FlowersList
       :flowers="filterFlowers(flowers, searchedText, selectedSeasons)"
     />
-  </div>
+  </main>
 </template>
 
-<style scoped>
+<style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Quicksand:wght@300;400;500;700&display=swap');
-  .wrapper {
-    width: 80%;
-    margin: 0 auto;
+  body {
+    background-color: #f5f7f5;
     font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  #flowers {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: space-between;
-    gap: 2rem 2rem;
-  }
-  ul li {
-    list-style: none;
-  }
-  .flower-picture {
+  .wrapper {
     width: 100%;
-    height: 60%;
-    border-radius: 55px 55px 0 0;
-  }
-  .flower-tile {
-    width: 350px;
-    height: 500px;
-    border-radius: 55px;
-    background: #eeeded;
-    box-shadow:  12px 12px 27px #dddcdc, -12px -12px 27px #ffffff;    
-  }
-  .flower-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    padding: 0 0 0 2rem;
-  }
-  .flower-seasons, .flower-months {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    align-content: space-between;
-    gap: 1rem 1rem;
   }
 </style>

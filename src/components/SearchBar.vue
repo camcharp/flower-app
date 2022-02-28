@@ -17,6 +17,7 @@ export default {
       this.$emit('inputChange', event.target.value);
     },
     onCheckSeason(value) {
+      console.log('emit value', value);
       this.$emit('checkbox',
       {
         season: value.season,
@@ -28,59 +29,58 @@ export default {
 </script>
 
 <template>
-  <form id="flower-form">
-    <label for="flower-search">
-      Rechercher un nom de fleur :
-    </label>
-    <input
-      type="search"
-      @input="onInputChange"
-      placeholder="pivoine"
-    >
-
-    <div v-for="(value, key) in seasons" :key="key">
-      <SeasonButton :isSelected="value" :season="key" @checkbox="onCheckSeason"/>
+  <div id="search-filters">
+    <div class="filter">
+      <label for="flower-search">
+        <p>
+          Rechercher un nom de fleur :
+        </p>
+      </label>
+      <input
+        type="search"
+        @input="onInputChange"
+        placeholder="pivoine"
+      >
     </div>
-  </form>
+    <div class="filter">
+      <span>
+        Filtrer par saison de disponibilité :
+      </span>
+      <div class="seasons-wrapper">
+        <div v-for="(value, key) in seasons" :key="key">
+          <SeasonButton :isselected="value" :season="key" @checkbox="onCheckSeason"/>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style>
-  #flower-form {
-    text-align: center;
+  #search-filters {
     display: flex;
-    flex-direction: column;
+    flex-flow: row wrap;
+    width: 100vw;
+    color: #2b4660;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+    box-shadow: 0 2px 10px 0 rgb(43 70 96 / 20%);
+    margin-bottom: 3rem;
   }
-  .season-button input[type="checkbox"] {
-    display: none;
+  .filter {
+    box-sizing: border-box;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8px 0;
+    margin: 0 0 0 7rem;
   }
-  .season-button {
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: 12px 24px;
-    border: 1px solid #94636c;
-    border-radius: 8px;
-    background: #ffffff;
-    font: normal normal bold 20px arial;
-    color: black;
-    text-decoration: none;
-  }
-  .season-button:hover,
-  .season-button:focus,
-  .season-button[is-selected=true] {
-      border: 1px solid #d48e9a;
-      background: #ffc4d4;
-      background: -webkit-gradient(linear, left top, left bottom, from(#ffc4d4), to(#b27782));
-      background: -moz-linear-gradient(top, #ffc4d4, #b27782);
-      background: linear-gradient(to bottom, #ffc4d4, #b27782);
-      color: black;
-      text-decoration: none;
-  }
-  .season-button:active {
-      background: #94636c;
-      background: -webkit-gradient(linear, left top, left bottom, from(#94636c), to(#94636c));
-      background: -moz-linear-gradient(top, #94636c, #94636c);
-      background: linear-gradient(to bottom, #94636c, #94636c);
+  .seasons-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0 1rem;
+    gap: 1rem;
   }
 </style>
