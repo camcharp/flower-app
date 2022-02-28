@@ -3,7 +3,7 @@ import SeasonButton from './SeasonButton'
 
 export default {
   name: 'search-bar-component',
-  props: ['seasons'],
+  props: ['seasons', 'searchInput'],
   data() {
     return {
     }
@@ -11,18 +11,20 @@ export default {
   components: {
     SeasonButton
   },
-  emits: ['inputChange', 'checkbox'],
+  emits: ['inputChange', 'seasonClicked', 'resetSearch'],
   methods: {
     onInputChange(event) {
       this.$emit('inputChange', event.target.value);
     },
-    onCheckSeason(value) {
-      console.log('emit value', value);
-      this.$emit('checkbox',
+    selectSeasons(value) {
+      this.$emit('seasonClicked',
       {
         season: value.season,
         checked: value.checked
       });
+    },
+    resetSearch() {
+      this.$emit('resetSearch');
     }
   }
 }
@@ -31,26 +33,30 @@ export default {
 <template>
   <div id="search-filters">
     <div class="filter">
+      <i class="gg-search"></i>
       <label for="flower-search">
-        <p>
-          Rechercher un nom de fleur :
-        </p>
+        <span>Rechercher un nom de fleur :</span>
       </label>
       <input
         type="search"
         @input="onInputChange"
         placeholder="pivoine"
+        :value="searchInput"
       >
     </div>
     <div class="filter">
-      <span>
-        Filtrer par saison de disponibilité :
-      </span>
+      <span>Filtrer par saison de floraison : </span>
       <div class="seasons-wrapper">
         <div v-for="(value, key) in seasons" :key="key">
-          <SeasonButton :isselected="value" :season="key" @checkbox="onCheckSeason"/>
+          <SeasonButton :isselected="value" :season="key" @seasonClicked="selectSeasons"/>
         </div>
       </div>
+    </div>
+    <div class="reset-search">
+      <button @click="resetSearch">
+        <i class="gg-undo"></i>
+        réinitialiser 
+      </button>
     </div>
   </div>
 </template>
@@ -59,27 +65,36 @@ export default {
   #search-filters {
     display: flex;
     flex-flow: row wrap;
-    width: 100vw;
-    color: #2b4660;
+    justify-content: center;
+    width: 100%;
+    color: #45494C;
     position: sticky;
     top: 0;
     background-color: #fff;
     z-index: 1;
     box-shadow: 0 2px 10px 0 rgb(43 70 96 / 20%);
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
   }
-  .filter {
+  .reset-search {
     box-sizing: border-box;
-    min-height: 50px;
     display: flex;
     align-items: center;
     position: relative;
-    padding: 8px 0;
-    margin: 0 0 0 7rem;
+    margin: 0 1rem;
+  }
+  .filter {
+    box-sizing: border-box;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    border-right: 1px solid #C3CAD0;
   }
   .seasons-wrapper {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     margin: 0 1rem;
     gap: 1rem;
   }

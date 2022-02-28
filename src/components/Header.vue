@@ -13,8 +13,8 @@ export default {
 <style>
   header {
     display: block;
-    height: 75px;
-    width: 100vw;
+    height: 65px;
+    width: 100%;;
     z-index: 100;
     position: relative;
     left: 0px;
@@ -24,8 +24,8 @@ export default {
   }
   header h1 {
     font-size: 1.6rem;
-    padding-left: 7rem;
+    padding-left: 10%;
     margin: 0;
-    line-height: 75px;
+    line-height: 65px;
   }
 </style>

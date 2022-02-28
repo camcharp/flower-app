@@ -1,33 +1,43 @@
 <script>
+  import FlowerTile from './FlowerTile'
   export default {
     name: 'flower-list-component',
     props: ['flowers'],
+    emits: ['resetSearch'],
     components: {
+      FlowerTile
+    },
+    methods: {
+      resetSearch() {
+        this.$emit('resetSearch');
+      }
     }
   }
 </script>
 
 <template>
-  <ul id="flowers-list">
-    <li v-for="flower in flowers" :key="flower.name" class="flower-tile">
-      <img class="flower-picture" :src="require(`../assets/flowers/${flower.picture}`)" :alt="flower.name">
-        <div class="flower-infos">
-          <p class="flower-title">
-            {{ flower.name }}
-          </p>
-          <ul class="flower-seasons">
-            <li v-for="season in flower.seasons" :key="season" v-bind:class="`flower-season ${season}`">
-              {{season}}
-            </li>
-          </ul>
-          <ul class="flower-months">
-            <li v-for="month in flower.months" :key="month">
-              {{ month }}
-            </li>
-          </ul>
-        </div>
-    </li>
-  </ul>
+  <div class="number-results">
+    <p v-if="flowers && flowers.length > 1">
+      {{flowers.length}} fleurs trouvées
+    </p>
+    <p v-else>
+      {{flowers.length}} fleur trouvée
+    </p>
+  </div>
+  <div v-if="flowers && flowers.length">
+    <ul id="flowers-list">
+      <FlowerTile :flowers="flowers"/>
+    </ul>
+  </div>
+  <div v-else class="no-results">
+    <p>
+      Cette recherche ne correspond à aucune fleur.
+    </p>
+    <button class="cta" @click="resetSearch">
+      <i class="gg-undo"></i>
+      Réinitialiser la recherche
+    </button>
+  </div>
 </template>
 
 <style>
@@ -35,6 +45,11 @@
     width: 80%;
     margin: 0 auto;
     font-family: 'Quicksand', sans-serif;
+  }
+  .number-results p {
+    text-align: end;
+    padding: 1rem;
+    font-family: 0.6rem;
   }
   #flowers-list {
     display: flex;
@@ -51,49 +66,25 @@
   ul li {
     list-style: none;
   }
-  .flower-picture {
-    width: 100%;
-    height: 60%;
-    border-radius: 55px 55px 0 0;
+  .no-results {
+    margin: 0 auto;
+    text-align: center;
   }
-  .flower-tile {
-    width: 350px;
-    height: 500px;
-    border-radius: 55px;
-    background: #eeeded;
-    box-shadow:  12px 12px 27px #dddcdc, -12px -12px 27px #ffffff;    
+  button.cta {
+    color: #FFFFFF;
+    background: #1A916E;
+    margin: 0 auto;
   }
-  .flower-infos {
-    padding: 0 2rem;
-  }
-  .flower-title {
-    font-size: 1.3rem;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .flower-seasons, .flower-months {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    align-content: space-between;
-    gap: 1rem 1rem;
-  }
-  .flower-season {
-    background-color: #E0E0E0;
-    padding: 0.5rem;
+  button.cta:hover {
+    cursor: pointer;
+    text-align: center;
     border-radius: 16px;
+    border: 1px solid #74747B;
+    font-weight: 500;
+    color: #FFFFFF;
+    background: #135843;
   }
-  .automne {
-    background-color: darksalmon;
-  }
-  .hiver {
-    background-color: lightblue;
-  }
-  .été {
-    background-color: pink;
-  }
-  .printemps {
-    background-color: mediumaquamarine;
+  button.cta:active {
+    background: #0B3428;
   }
 </style>
