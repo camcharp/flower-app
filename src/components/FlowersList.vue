@@ -35,7 +35,7 @@
   </div>
   <div v-else class="no-results">
     <p>
-      Cette recherche ne correspond à aucune fleur.
+      Oups, aucune fleur ne correspond à cette recherche... :(
     </p>
     <button class="cta" @click="resetSearch">
       <i class="gg-undo"></i>

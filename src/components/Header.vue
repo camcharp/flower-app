@@ -6,7 +6,11 @@ export default {
 
 <template>
   <header>
-    <h1>Fleurs de saison</h1>
+    <h1>
+      <a href="/">
+        Fleurs de saison
+      </a>
+    </h1>
   </header>
 </template>
 
@@ -28,5 +32,10 @@ export default {
     margin: 0;
     line-height: 65px;
     font-weight: 500;
+  }
+  header a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #f5f7f5
   }
 </style>
