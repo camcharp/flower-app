@@ -4,11 +4,24 @@ import Header from './Header'
 import FlowersList from './FlowersList'
 import SearchBar from './SearchBar'
 import {
+  seasons,
   mapMonthsToSeasons,
   formatMonths,
   isMonthsListValid,
   areAllSeasonsUnchecked
 } from '../utils/seasons.js'
+
+function getInitialState() {
+  return {
+    searchedText: '',
+    seasonsStatus: {
+      [seasons.hiver.id]: false,
+      [seasons.printemps.id]: false,
+      [seasons.ete.id]: false,
+      [seasons.automne.id]: false,
+    }
+  };
+}
 
 function formatData(flowers) {
   return flowers.map(flower => {
@@ -26,15 +39,7 @@ export default {
   data() {
     return {
       flowers: formatData(flowers),
-      searchParams: {
-        searchedText: '',
-        seasonsStatus: {
-          hiver: false,
-          printemps: false,
-          été: false,
-          automne: false,
-        }
-      }
+      searchParams: getInitialState()
     }
   },
   components: {
@@ -50,15 +55,7 @@ export default {
       this.searchParams.seasonsStatus[seasonObject.season] = seasonObject.checked;
     },
     resetSearchParams: function() {
-      this.searchParams = {
-        searchedText: '',
-        seasonsStatus: {
-          hiver: false,
-          printemps: false,
-          été: false,
-          automne: false,
-        }
-      };
+      this.searchParams = getInitialState();
     },
     filterFlowers(flowers, searchParams) {
       const filteredFlowers = flowers.filter(flower => {
@@ -112,10 +109,10 @@ export default {
   @import url('https://css.gg/check.css');
   
   body {
-    background-color: #f5f7f5;
     font-family: 'Quicksand', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: var(--main-white);
     box-sizing: border-box;
   }
   .wrapper {
@@ -131,13 +128,13 @@ export default {
     text-align: center;
     padding: 0.6rem 2rem;
     border-radius: 16px;
-    border: 1px solid #74747B;
+    border: 1px solid var(--main-grey);
     font-weight: 500;
     background: #EBEBEB;
-    color: #45494C;
+    color: var(--dark-grey);
   }
   button:hover {
-    background: #C2D1A9;
+    background: var(--light-green);
   }
   button:active {
     background: #B2C19B;

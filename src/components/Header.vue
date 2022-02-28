@@ -23,8 +23,8 @@ export default {
     position: relative;
     left: 0px;
     top: 0px;
-    color: #f5f7f5;
-    background: #1A916E;
+    color: var(--main-white);
+    background: var(--main-green);
   }
   header h1 {
     font-size: 1.6rem;
@@ -36,6 +36,6 @@ export default {
   header a {
     cursor: pointer;
     text-decoration: none;
-    color: #f5f7f5
+    color: var(--main-white)
   }
 </style>

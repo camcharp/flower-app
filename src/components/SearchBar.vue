@@ -1,5 +1,5 @@
 <script>
-import SeasonButton from './SeasonButton'
+import FilterSeasonButton from './FilterSeasonButton'
 
 export default {
   name: 'search-bar-component',
@@ -9,7 +9,7 @@ export default {
     }
   },
   components: {
-    SeasonButton
+    FilterSeasonButton
   },
   emits: ['inputChange', 'seasonClicked', 'resetSearch'],
   methods: {
@@ -48,7 +48,7 @@ export default {
       <span>Filtrer par saison de floraison : </span>
       <div class="seasons-wrapper">
         <div v-for="(value, key) in seasons" :key="key">
-          <SeasonButton :isselected="value" :season="key" @seasonClicked="selectSeasons"/>
+          <FilterSeasonButton :isselected="value" :season="key" @seasonClicked="selectSeasons"/>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ export default {
     flex-flow: row wrap;
     justify-content: center;
     width: 100%;
-    color: #45494C;
+    color: var(--dark-grey);
     position: sticky;
     top: 0;
     background-color: #fff;
@@ -90,13 +90,13 @@ export default {
     position: relative;
     gap: 0.5rem;
     padding: 0 1rem;
-    border-right: 1px solid #C3CAD0;
+    border-right: 1px solid var(--light-grey);
   }
   .filter input {
     font-family: 'Quicksand', sans-serif;
     padding: 6px 10px;
     border-radius: 16px;
-    border: 1px solid #74747B;
+    border: 1px solid var(--main-grey);
   } 
   .seasons-wrapper {
     display: flex;
@@ -105,6 +105,9 @@ export default {
     gap: 1rem;
   }
   @media (max-width: 658px) {
+    #search-filters {
+      position: relative;
+    }
     .filter {
       border-right: 0;
       padding: 10px;
@@ -113,7 +116,7 @@ export default {
     .filter::after {
         content: "";
         position: absolute;
-        border-top: 1px solid #C3CAD0;
+        border-top: 1px solid var(--light-grey);
         left: 0;
         bottom: 0;
         width: 100%;

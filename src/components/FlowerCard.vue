@@ -1,7 +1,13 @@
 <script>
+import { seasons } from '../utils/seasons.js'
   export default {
     name: 'flower-card-component',
-    props: ['flowers', 'seasonsStatus']
+    props: ['flowers', 'seasonsStatus'],
+    data() {
+      return {
+        seasons
+      }
+    }
   }
 </script>
 
@@ -18,13 +24,9 @@
         </p>
           <ul class="flower-seasons">
             <li v-for="(value, season) in seasonsStatus" :key="value" class="flower-season" v-bind:class="{ active: flower.seasons.includes(season) }">
-              {{ season }}
+              {{ seasons[season].displayName }}
             </li>
           </ul>
-        <ul class="flower-months">
-          <li v-for="month in flower.months" :key="month">
-          </li>
-        </ul>
       </div>
   </li>
 </template>
@@ -61,7 +63,7 @@
   .flower-title::after {
     content: "";
     position: absolute;
-    border-top: 1px solid #C3CAD0;
+    border-top: 1px solid var(--light-grey);
     left: 0;
     bottom: 0;
     width: 100%;
@@ -94,7 +96,7 @@
     text-decoration: line-through;
   }
   .flower-season.active {
-    background-color: #C2D1A9;
+    background-color: var(--light-green);
   }
   @media (max-width: 658px) {
     .flower-card {
@@ -105,7 +107,7 @@
       max-height: 170px;
     }
     .flower-title {
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
   }
 </style>

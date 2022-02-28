@@ -1,16 +1,35 @@
+const seasons = {
+  hiver: {
+    id: 'hiver',
+    displayName: 'hiver'
+  },
+  printemps: {
+    id: 'printemps',
+    displayName: 'printemps'
+  },
+  ete: {
+    id: 'ete',
+    displayName: 'été'
+  },
+  automne: {
+    id: 'automne',
+    displayName: 'automne'
+  }
+}
+
 const seasonMapping = {
-  janvier: ['hiver'],
-  février: ['hiver'],
-  mars: ['hiver', 'printemps'],
-  avril: ['printemps'],
-  mai: ['printemps'],
-  juin: ['été', 'printemps'],
-  juillet: ['été'],
-  aout: ['été'],
-  septembre: ['automne', 'été'],
-  octobre: ['automne'],
-  novembre: ['automne'],
-  décembre: ['automne', 'hiver']
+  janvier: [seasons.hiver.id],
+  février: [seasons.hiver.id],
+  mars: [seasons.hiver.id, seasons.printemps.id],
+  avril: [seasons.printemps.id],
+  mai: [seasons.printemps.id],
+  juin: [seasons.ete.id, seasons.printemps.id],
+  juillet: [seasons.ete.id],
+  aout: [seasons.ete.id],
+  septembre: [seasons.automne.id, seasons.ete.id],
+  octobre: [seasons.automne.id],
+  novembre: [seasons.automne.id],
+  décembre: [seasons.automne.id, seasons.hiver.id]
 }
 
 const validMonths = Object.keys(seasonMapping);
@@ -40,6 +59,7 @@ function areAllSeasonsUnchecked(seasonsStatus) {
 }
 
 export {
+  seasons,
   mapMonthsToSeasons,
   formatMonths,
   isMonthsListValid,

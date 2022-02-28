@@ -85,14 +85,14 @@
   }
   button.cta {
     color: #FFFFFF;
-    background: #1A916E;
+    background: var(--main-green);
     margin: 0 auto;
   }
   button.cta:hover {
     cursor: pointer;
     text-align: center;
     border-radius: 16px;
-    border: 1px solid #74747B;
+    border: 1px solid var(--main-grey);
     font-weight: 500;
     color: #FFFFFF;
     background: #135843;

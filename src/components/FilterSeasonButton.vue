@@ -1,8 +1,15 @@
 <script>
+import { seasons } from '../utils/seasons.js'
+
 export default {
   name: 'season-button-component',
   props: ['season', 'isselected'],
   emits: ['seasonClicked'],
+  data() {
+    return {
+      seasons
+    }
+  },
   methods: {
     selectSeasons(event) {
       this.$emit('seasonClicked',
@@ -20,7 +27,7 @@ export default {
     <i class="gg-radio-checked" v-if="isselected"></i>
     <i class="gg-radio-check" v-else></i>
     <input type="checkbox" v-bind:id="season" v-bind:name="season" v-bind:value="season" @click="selectSeasons">
-    {{ season }}
+      {{ seasons[season].displayName }}
   </label>
 </template>
 
@@ -33,18 +40,18 @@ export default {
     text-align: center;
     padding: 6px 25px;
     border-radius: 16px;
-    border: 1px solid #74747B;
+    border: 1px solid var(--main-grey);
     font-weight: 500;
   }
   .season-button:hover,
   .season-button:focus,
   .season-button[isselected=true] {
-    background: #C2D1A9;
+    background: var(--light-green);
     color: #28282A;
     text-decoration: none;
   }
   .season-button:active {
-    background: #B0BD9A;
+    background: var(--active-green);
   }
   .season-button input[type="checkbox"] {
     display: none;
